@@ -37,8 +37,8 @@ Pourfecto is not currently registered with the Julia General Registry, and it al
 
 ```julia
 using Pkg
-Pkg.add("https://github.com/jensenlab/JLIMS")
-Pkg.add("https://github.com/jensenlab/Pourfecto")
+Pkg.add(url="https://github.com/jensenlab/JLIMS")
+Pkg.add(url="https://github.com/jensenlab/Pourfecto")
 ```
 
 
