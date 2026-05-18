@@ -33,11 +33,11 @@ Pourfecto can answer questions such as:
 
 ## Installation
 
-If Pourfecto is registered:
+Pourfecto is not currently registered with the Julia General Registry
 
 ```julia
 using Pkg
-Pkg.add("Pourfecto")
+Pkg.add("https://github.com/jensenlab/Pourfecto")
 ```
 
 
