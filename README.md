@@ -87,7 +87,7 @@ David BM and Jensen PA.
 
 [**Planning and scheduling biological experiments across multiple liquid handling robots**](https://www.biorxiv.org/content/10.64898/2025.12.26.696584v1)
 
-*BioRxiv*.2025; [doi:10.64898/2025.12.26.696584](https://www.biorxiv.org/content/10.64898/2025.12.26.696584v1)
+*bioRxiv*.2025; [doi:10.64898/2025.12.26.696584](https://www.biorxiv.org/content/10.64898/2025.12.26.696584v1)
 
 
 ---
