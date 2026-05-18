@@ -33,10 +33,11 @@ Pourfecto can answer questions such as:
 
 ## Installation
 
-Pourfecto is not currently registered with the Julia General Registry
+Pourfecto is not currently registered with the Julia General Registry, and it also has another unregistered package, JLIMS, as a dependency. 
 
 ```julia
 using Pkg
+Pkg.add("https://github.com/jensenlab/JLIMS")
 Pkg.add("https://github.com/jensenlab/Pourfecto")
 ```
 
