@@ -19,4 +19,7 @@ pages = [
 
 )
 
+deploydocs(
+    repo = "github.com/jensenlab/Pourfecto.git",
+)
 
