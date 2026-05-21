@@ -33,11 +33,12 @@ Pourfecto can answer questions such as:
 
 ## Installation
 
-If Pourfecto is registered:
+Pourfecto is not currently registered with the Julia General Registry, and it also has another unregistered package, JLIMS, as a dependency. 
 
 ```julia
 using Pkg
-Pkg.add("Pourfecto")
+Pkg.add(url="https://github.com/jensenlab/JLIMS")
+Pkg.add(url="https://github.com/jensenlab/Pourfecto")
 ```
 
 
@@ -86,7 +87,7 @@ David BM and Jensen PA.
 
 [**Planning and scheduling biological experiments across multiple liquid handling robots**](https://www.biorxiv.org/content/10.64898/2025.12.26.696584v1)
 
-*BioRxiv*.2025; [doi:10.64898/2025.12.26.696584](https://www.biorxiv.org/content/10.64898/2025.12.26.696584v1)
+*bioRxiv*.2025; [doi:10.64898/2025.12.26.696584](https://www.biorxiv.org/content/10.64898/2025.12.26.696584v1)
 
 
 ---
