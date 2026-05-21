@@ -1,5 +1,8 @@
 # Pourfecto.jl
 
+[![](https://img.shields.io/badge/docs-dev-blue.svg)](http://jensenlab.net/Pourfecto/dev/)
+
+
 **Pourfecto.jl** is a Julia package for planning and scheduling automated liquid handling workflows.
 
 Pourfecto turns source reagents, target formulations, labware, and instrument configurations into a solved **Pourcast**: a structured result object containing planned transfers, scheduled flows, model metadata, and solution-quality information.
