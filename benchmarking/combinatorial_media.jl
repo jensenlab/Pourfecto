@@ -1,4 +1,4 @@
-using Pourfecto, JLIMS, Unitful, Random
+using Pourfecto, JLIMS, Unitful, Random, DataFrames, CSV
 Random.seed!(48207531)
 
 reagents = [string_to_reagent("R$i",Solid) for i in 1:48]
@@ -17,16 +17,15 @@ for r in eachindex(reagents)
     well2.stock =st 
 end 
 
-water_deep_reservior = generate(labwares["DeepReservior"])
+water_deep_reservoir = generate(labwares["DeepReservoir"])
 
-children(water_deep_reservior)[1].stock = 100u"mL" * water 
+children(water_deep_reservoir)[1].stock = 100u"mL" * water 
 
 water_bottle = generate(labwares["Bottle1L"])
 children(water_bottle)[1].stock = 1u"L" * water 
 
 
 n_plates = 5 
-
 target_plates = Labware[]
 
 for p in 1:n_plates 
@@ -44,9 +43,9 @@ end
 
 
 priority = PriorityDict("water" => typemax(UInt64))
-source_labware = [source_deep_well,water_deep_reservior,water_bottle]
+source_labware = [source_deep_well,water_deep_reservoir,water_bottle]
 source_labware2 = [source_deep_well,water_bottle]
-configs = ["single_channel","eight_channel_vertical","eight_channel_horizontal","plate_master"]
+configs = ["single_channel","eight_channel_vertical","eight_channel_horizontal","plate_master","cobra","nimbus","tempest"]
 
 pc1,time1 = @timed pourfecto(source_labware,target_plates ,configs;priority=priority,grb_timelimit=45) # run once bc of precompile 
 
@@ -63,7 +62,7 @@ pc4, time4 = @timed pourfecto(source_labware,target_plates,configs;priority=prio
 pcs = [pc1,pc2,pc3,pc4]
 tms = [time1,time2,time3,time4]
 
-names = ["All Sources" ,"No Reservior", "Minimize Active Flows","Minimize Configurations"]
+names = ["All Sources" ,"No Reservoir", "Minimize Active Flows","Minimize Configurations"]
 
 ts = transfers.(pcs)
 fs = flows.(pcs) 
@@ -78,7 +77,7 @@ df = DataFrame()
 
 for i in eachindex(pcs) 
 
-    d = (name = names[i], single_channel = config_trfs[i][1], eight_channel = sum(config_trfs[i][2:3]),plate_master = config_trfs[i][4], transfers= sum(ts[i]),flows=sum(fs[i]),active_flows = sum(as[i]),time = tms[i])
+    d = (name = names[i], single_channel = config_trfs[i][1], eight_channel = sum(config_trfs[i][2:3]),plate_master = config_trfs[i][4],cobra= config_trfs[i][5],nimbus=config_trfs[i][6], tempest=config_trfs[i][7],transfers= sum(ts[i]),flows=sum(fs[i]),active_flows = sum(as[i]),time = tms[i])
     push!(df,d)
 end 
 
