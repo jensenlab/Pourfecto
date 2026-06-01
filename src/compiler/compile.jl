@@ -113,7 +113,7 @@ function compile(directory::AbstractString,pourcast::Pourcast; packing_method::F
         end
 
 
-        config_directory = joinpath(directory,string(get_config_type(configs(pourcast)[c])))
+        config_directory = joinpath(directory,string(nameof(get_config_type(configs(pourcast)[c]))))
         if !isdir(config_directory)
             mkdir(config_directory)
         end

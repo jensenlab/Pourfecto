@@ -21,7 +21,7 @@ function test_pourcast_compilation(name::String,pourcast::Pourcast)
 
             for c in eachindex(cfgs)
                 if sum(config_slotting[c]) > 0 
-                    cfgtype = string(Pourfecto.get_config_type(cfgs[c]))
+                    cfgtype = string(nameof(Pourfecto.get_config_type(cfgs[c])))
                     cfgdir  = joinpath(outroot, cfgtype)
                     @test isdir(cfgdir)
 

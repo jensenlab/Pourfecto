@@ -305,7 +305,7 @@ function labware_to_df(lws::Vector{<:Labware},format="vc";kwargs...)
             end 
         end
         n = length(wellnames) 
-        append!(lw_df,DataFrame( labware = fill(string(typeof(lw)),n), name= fill(JLIMS.name(lw),n),well=wellnames))
+        append!(lw_df,DataFrame( labware = fill(string(nameof(typeof(lw))),n), name= fill(JLIMS.name(lw),n),well=wellnames))
     end 
 
     stock_df,units_df = stock_to_df(stocks,format;kwargs...)

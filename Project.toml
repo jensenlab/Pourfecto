@@ -1,6 +1,6 @@
 name = "Pourfecto"
 uuid = "82aece00-2e0a-4aa7-b3de-eea0746b1d2e"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Ben David <66976120+bmdavid2@users.noreply.github.com>"]
 
 [deps]
