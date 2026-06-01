@@ -78,7 +78,7 @@ function convert_design(design::DataFrame,sources::Vector{<:Labware},targets::Ve
             if design[row,col] == 0 
                 continue # skip if no volume transferred 
             end 
-            push!(source_id,name(s_slot))
+            push!(source_id,JLIMS.name(s_slot))
             if length(source) ==1 
                 push!(source_position,s_pos)
             else
