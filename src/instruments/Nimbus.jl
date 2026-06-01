@@ -63,11 +63,11 @@ function convert_design(design::DataFrame,sources::Vector{<:Labware},targets::Ve
     within_src_index = vcat([1:length(sources[i]) for i in 1:S]...) 
      T=length(targets)
     tgt_idx = vcat([fill(i,length(targets[i])) for i in 1:T]...)
-    within_src_index = vcat([1:length(targets[i]) for i in 1:T]...) 
+    within_tgt_index = vcat([1:length(targets[i]) for i in 1:T]...) 
 
     source_id=String[]
     source_position=Union{String,Integer}[]
-    volume=Unitful.Volume[]
+    volume=Real[]
     destination_id=String[]
     destination_position=Union{String,Integer}[]
     alphabet=collect('A':'Z')
@@ -78,24 +78,21 @@ function convert_design(design::DataFrame,sources::Vector{<:Labware},targets::Ve
             if design[row,col] == 0 
                 continue # skip if no volume transferred 
             end 
-            push!(source_id,JLIMS.name(s_slot))
+            push!(source_id,s_slot.name)
             if length(source) ==1 
                 push!(source_position,s_pos)
             else
-
-                r,c = cartesian(falses(JLIMS.shape(source)...),within_labware_index[row])
-                pos=string(alphabet[r],c)
+                pos = cartesian_to_well(CartesianIndices(JLIMS.children(source))[with_src_index[row]])
                 push!(source_position,pos)
             end 
             push!(volume,design[row,col])
             destination =targets[tgt_idx[col]]
             d_slot,d_pos = slotting[destination]
-            push!(destination_id,name(d_slot))
+            push!(destination_id,d_slot.name)
             if length(destination) == 1 
                 push!(destination_position,d_pos)
             else
-                r,c = cartesian(falses(JLIMS.shape(destination)...),within_labware_index[col])
-                pos=string(alphabet[r],c)
+                pos = cartesian_to_well(CartesianIndices(JLIMS.children(destination))[within_tgt_index[col]])
                 push!(destination_position,pos)
             end 
         end 
@@ -125,9 +122,9 @@ function write_instrument_files(directory::AbstractString,design::DataFrame,sour
     n=nrow(df)
     dispense_df=DataFrame([[],[],[],[],[],],names(df))
     for i = 1:n 
-        vol=df[i,"Volume (uL)"]
-        while vol > 1e-4*u"µL" 
-            shotvol=min(channels(head(config))[1].maxVol,vol) # maximum shot volume of 1 ml 
+        vol=df[i,"Volume (uL)"] *u"µL"
+        while vol > 1e-4u"µL"
+            shotvol=min(channels(head(config))[1].capacity,vol) # maximum shot volume of 1 ml 
             push!(dispense_df,(df[i,"Source Labware ID"],df[i,"Source Position ID"],ustrip(uconvert(u"µL",shotvol)),df[i,"Destination Labware ID"],df[i,"Destination Position ID"]))
             vol-=shotvol
         end 

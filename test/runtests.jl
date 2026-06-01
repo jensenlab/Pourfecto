@@ -49,5 +49,6 @@ include("test_problems/labware_stamping.jl")
 include("test_problems/mantis_pcr.jl")
 include("test_problems/tempest_compilation.jl")
 include("test_problems/cobra_compilation.jl")
+include("test_problems/nimbus_compilation.jl")
 
 
