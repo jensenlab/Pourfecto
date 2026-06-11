@@ -9,10 +9,14 @@ CurrentModule = Pourfecto
 
 ## Installation
 
+Pourfecto can be installed from the [`Jensen Lab Registry`](https://github.com/jensenlab/JensenLabRegistry). Follow instructions to add the registry before continuing 
+
+Once the registry has been installed, add Pourfecto with the following command:
+
 ```julia
+# after installing JensenLabRegistry
 using Pkg
-Pkg.add(url="https://github.com/jensenlab/JLIMS")
-Pkg.add(url="https://github.com/jensenlab/Pourfecto")
+Pkg.add("Pourfecto")
 ```
 
 Then load the package:
@@ -22,7 +26,7 @@ using Pourfecto
 ```
 
 !!! note 
-    Pourfecto requires an active [Gurobi](https://www.gurobi.com) license to run its planning and scheduling algorithms. Licenses are free for academic users, as of the time of writing. 
+    Pourfecto requires an active [Gurobi](https://www.gurobi.com) license to run its planning and scheduling algorithms. Licenses are free for academic users as of the time of writing. 
 
 ---
 
