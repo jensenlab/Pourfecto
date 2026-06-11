@@ -21,7 +21,7 @@ Pourfecto separates liquid handling protocol design into two stages:
 2. **Scheduling**  
    Determines how those planned transfers can be executed using available labware and liquid-handling instrument configurations.
 
-Pourfecto can answer questions such as:
+Pourfecto reasons over many of the following questions as it creates protocols: 
 
 - Which source stocks should be transferred into each target?
 - What transfer volumes are required?
@@ -31,25 +31,37 @@ Pourfecto can answer questions such as:
 - What is the expected composition of each planned target?
 - Can the resulting workflow be compiled for downstream execution?
 
+Pourfecto's goal is to abstract all of the logistical details of converting designs into protocols. 
+
 ---
 
 
 ## Installation
 
-Pourfecto is not currently registered with the Julia General Registry, and it also has another unregistered package, JLIMS, as a dependency. 
+## Installation
+
+Pourfecto can be installed from the [`Jensen Lab Registry`](https://github.com/jensenlab/JensenLabRegistry). Follow instructions to add the registry before continuing 
+
+Once the registry has been installed, add Pourfecto with the following command:
 
 ```julia
+# after installing JensenLabRegistry
 using Pkg
-Pkg.add(url="https://github.com/jensenlab/JLIMS")
-Pkg.add(url="https://github.com/jensenlab/Pourfecto")
+Pkg.add("Pourfecto")
 ```
-
 
 Then load the package:
 
 ```julia
 using Pourfecto
 ```
+
+!!! note 
+    Pourfecto requires an active [Gurobi](https://www.gurobi.com) license to run its planning and scheduling algorithms. Licenses are free for academic users as of the time of writing. 
+
+---
+
+
 
 Most workflows also utilize the [JLIMS](https://github.com/jensenlab/JLIMS), [Unitful](https://github.com/JuliaPhysics/Unitful.jl), and [DataFrames](https://github.com/JuliaData/DataFrames.jl) Julia packages.
 
