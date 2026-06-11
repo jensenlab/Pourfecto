@@ -375,7 +375,7 @@ end
 
 
 
-function planner(sources::Vector{<:JLIMS.Stock},targets::Vector{<:JLIMS.Stock},kwargs...)
+function planner(sources::Vector{<:JLIMS.Stock},targets::Vector{<:JLIMS.Stock};kwargs...)
         start_time = Dates.now()
         params = ParameterDict()
         pourfecto_version_metadata!(params)
