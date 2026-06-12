@@ -2,7 +2,7 @@ abstract type Cobra <: Instrument end
 
 piston_cobra = Piston{ContinuousActuator,MultiRepeater}(
     (25u"µL",800u"µL"),
-    (0.3u"µL",800u"µL"),
+    (0.3u"µL",40u"µL"),
     1.125
 )
 
