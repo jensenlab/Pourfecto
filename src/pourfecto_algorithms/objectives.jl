@@ -19,6 +19,19 @@ function min_cost_flow!(model::JuMP.Model,params::ParameterDict;config_costs::Ve
         return model,params
 end 
 
+function regularize_flows!(model::JuMP.Model,params::ParameterDict;kwargs...)
+        Q = model[:Q]
+        
+
+
+        set_objective_sense(model, MOI.FEASIBILITY_SENSE)
+        @objective(model, Min,sum(Q.^2)) # minimize with l2 norm to regularize flows
+        optimize!(model)
+        Qval= JuMP.value.(Q) 
+        @constraint(model,sum(Q.^2) <= sum(Qval.^2))
+        return model,params
+end 
+
 
 
 
@@ -169,7 +182,8 @@ const objectives = Dict{String,Function}(
     "min_sources" => min_sources!,
     "min_labware" => min_labware!,
     "min_config" => min_config!,
-    "min_aspirations" => min_aspirations!
+    "min_aspirations" => min_aspirations!,
+    "regularize_flows" => regularize_flows!
 )
 
 
@@ -180,5 +194,6 @@ const _objective_MILP_ = Dict{String,Bool}(
     "min_sources" => true,
     "min_labware" => true,
     "min_config" => true,
-    "min_aspirations" => true 
+    "min_aspirations" => true,
+    "regularize_flows"=> false
 )

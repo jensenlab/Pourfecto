@@ -41,6 +41,7 @@ priority = PriorityDict("water" => typemax(UInt64))
 
 
 pc1 = pourfecto([source_deep_well],target_plates,[configurations["cobra"]];priority=priority)
+pc2 = pourfecto([source_deep_well],target_plates,[configurations["cobra"]];priority=priority,objective=["min_cost_flow","regularize_flows"])
 
 test_pourcast_compilation("Cobra Compilation",pc1)
 

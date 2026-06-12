@@ -352,7 +352,7 @@ end
 
 function check_objective_dict(obj::Vector{<:AbstractString})
         for o in obj 
-                if _objective_MILP_[obj]
+                if _objective_MILP_[o]
                         return true 
                 end 
         end 
