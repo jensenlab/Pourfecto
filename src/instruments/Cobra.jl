@@ -2,7 +2,7 @@ abstract type Cobra <: Instrument end
 
 piston_cobra = Piston{ContinuousActuator,MultiRepeater}(
     (25u"µL",800u"µL"),
-    (0.3u"µL",40u"µL"),
+    (0.3u"µL",800u"µL"),
     1.125
 )
 
@@ -51,6 +51,7 @@ cobra_settings=InstrumentSettings(
     "washtime" => 8000, 
     "AspPad" => piston_cobra.deadPad,
     "AspDistance" => 3 , 
+    "maxShot" => 40
 )
 
 
@@ -481,7 +482,7 @@ end
 function design_to_protocols(directory::AbstractString,design::DataFrame,source::JLIMS.Labware,destination::JLIMS.Labware,config::Configuration{Cobra})
   pad=settings(config)["AspPad"]
   maxASP=ustrip.(uconvert.(u"µL",map(x->x.asp[2],pistons(head(config))) ))
-  maxShot=ustrip(uconvert.(u"µL",map(x->x.disp[2],pistons(head(config)))))
+  maxShot=settings(config)["maxShot"]
   cobra_location=settings(config)["cobra_path"]
   # Check for issues with the design
 
@@ -519,7 +520,7 @@ function design_to_protocols(directory::AbstractString,design::DataFrame,source:
           for idx in disp_order
             if  total_vols < maxASP[channel]  # grab all of the rows we can complete with a single pass 
                 margin= max((maxASP[channel] - total_vols),0)
-                to_dispense[idx,channel]=min(d[idx,channel],maxShot[channel],margin/pad)
+                to_dispense[idx,channel]=min(d[idx,channel],maxShot,margin/pad)
                 total_vols=sum(to_dispense[:,channel])*pad
             else
               break 
