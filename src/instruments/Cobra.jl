@@ -40,7 +40,7 @@ dictionary keys:
 - `cobra_path`: the local path the cobra should look for protocol files on the machine running the instrument 
 - `washtime`: set how long the wash system should flush the nozzles for 
 - `AspPad = 1.125`: Force the cobra to overaspirate by a factor of AspPad. Pourfecto takes this into account when planning 
-- `AspDistnace = 2.5`: set how many millimeters above the bottom of the labware the cobra should aspirate from. 
+- `AspDistnace = 1.5`: set how many millimeters above the bottom of the labware the cobra should aspirate from. 
 
 
 """
@@ -50,7 +50,7 @@ cobra_settings=InstrumentSettings(
     "cobra_path" => "C:\\Users\\Dell\\University of Michigan Dropbox\\Benjamin David\\JensenLab\\Cobra\\",
     "washtime" => 8000, 
     "AspPad" => piston_cobra.deadPad,
-    "AspDistance" => 3 , 
+    "AspDistance" => 1.5 , 
     "maxShot" => 40
 )
 
